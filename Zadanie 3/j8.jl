@@ -102,6 +102,7 @@ for exp in ["exp1","exp2","exp3","exp4"]
     println("----------------------------------------")
 end
 
+
 sol1_x=[]
 sol1_y=[]
 diff1=[]
@@ -119,6 +120,8 @@ plot(layer(dataframe1_sol_x,x="t",y="u",Geom.line,Theme(default_color="blue")),l
 
 joined_dataframe=DataFrame(dt=sol1.t,dx=sol1_x,dy=sol1_y)
 
-widedf=DataFrame(dt=sol1.t, dx=sol1_x, dy=sol1_y)
+widedf=DataFrame(time=sol1.t, prey=sol1_x, predators=sol1_y)
 longdf=stack(widedf, 2:3)
-plot(longdf, ygroup="variable", x="dt", y="value", Geom.subplot_grid(Geom.point))
+plot(longdf, ygroup="variable", x="time", y="value", Geom.subplot_grid(Geom.line))
+
+plot(widedf,x="prey",y="predators",Geom.path)
